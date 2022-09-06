@@ -16,6 +16,19 @@ namespace APIDisneyCharacter.Controllers
 
     public class MovieController : ControllerBase
     {
+
+        [Route("/movies/validacion")]
+        [HttpGet]
+        public List<MovieEntity> GetValidationMovieList()
+        {
+            using (var db = new DisneyContext())
+            {
+                var movies = db.Movies.ToList();
+                return movies;
+            }
+                
+        }
+
         [Route("/movies")]
         [HttpGet]
         public IActionResult GetMovieList()

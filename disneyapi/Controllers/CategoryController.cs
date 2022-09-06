@@ -32,6 +32,17 @@ namespace APIDisneyCharacter.Controllers
             }
             return Ok(oCategory);
         }
+        [HttpGet]
+        public List<CategoryEntity> GetCategotyList()
+        {
+            using (var db = new DisneyContext())
+            {
+                var categories = db.Category.ToList();
+                return categories;
+            }
+                
+
+        }
 
         [Route("/categorys")]
         [HttpGet]

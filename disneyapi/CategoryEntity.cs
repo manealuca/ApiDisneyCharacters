@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using APIDisneyCharacter.Controllers;
+using disneyapi.Controllers;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,5 +26,20 @@ namespace disneyapi
         [JsonIgnore]
         public List<MovieEntity>? Movies { get; set; }
 
+    }
+
+    public class CategoryExistAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            CategoryController uController = new CategoryController();
+            var category = uController.GetCategotyList();
+            string Name = (string)value;
+            if (category.Where(c=> c.CategoryName == Name).Count()>0)
+            {
+                return new ValidationResult("Ya Existe una Categoria con este nombre");
+            }
+            return ValidationResult.Success;
+        }
     }
 }

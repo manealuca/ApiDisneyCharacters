@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using disneyapi.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,9 +28,25 @@ namespace disneyapi
         [StringLength(70)]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(30)]
-        public string Password { get; set; }
-
+        public byte[] PasswordSalt { get; set; } = new byte[32];
+        public byte[] PasswordHash { get; set; } = new byte[32];
+        public string? VerificationToken { get; set; }
+        public DateTime? VerifiedAt { get; set; }
+        public string? ResetVerificationToken { get; set; }
+        public DateTime? ResetTokenExpire { get; set; }
     }
+ /*   public class UserExistAttribute:ValidationAttribute
+    {
+       protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            UserController uController = new UserController();
+            var     user = uController.GetUsers();
+            string Email = (string)value;
+            if(user.Where(u=>u.Email == Email).Count() > 0)
+            {
+                return new ValidationResult("Ya Existe un usuario asociado a este correo");
+            }
+            return ValidationResult.Success;
+        }
+    }*/
 }
