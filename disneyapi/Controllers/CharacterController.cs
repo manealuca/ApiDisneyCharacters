@@ -140,12 +140,43 @@ namespace disneyapi.Controllers
         [HttpGet]
         public IActionResult SearchCharacter([FromQuery] string? name, [FromQuery] int? age, [FromQuery] float? weight, [FromQuery]string?movie,[FromQuery]string?order)
         {
-            List<CharacterEntity> characters = new List<CharacterEntity>();
-            List<MovieEntity> movies = new List<MovieEntity>();
+            MovieEntity? movies = new MovieEntity();
+            CharacterMovieController cmController = new CharacterMovieController();
+            List<CharacterEntity>? aux = new List<CharacterEntity>();
             using (var db = new DisneyContext())
             {
                 try
                 {
+                    if (String.IsNullOrEmpty(movie))
+                    {
+                        aux=db.Characters.ToList();
+                    }
+                    else
+                    {
+                        movies = db.Movies.Where(m => m.MovieName == movie).FirstOrDefault();
+
+                        aux=cmController.GetCharcters(movies.MovieId);
+                    }
+
+
+                    if (order == "DESC") {
+
+                        var characters = (from c in aux
+                                          where (String.IsNullOrEmpty(name) || c.CharacterName == name) &&
+                                          (!age.HasValue||c.CharacetrAge == age) &&(!weight.HasValue || c.CharacterWeight == weight)
+                                          select c).OrderByDescending(c => c.CharacterName);
+                        return Ok(characters);
+                    }
+                   else
+                    {
+                        var characters = (from c in aux
+                                          where (String.IsNullOrEmpty(name) || c.CharacterName == name) &&
+                                          (!age.HasValue || c.CharacetrAge == age) && (!weight.HasValue || c.CharacterWeight == weight)
+                                          select c).OrderBy(c => c.CharacterName).ToList();
+                        return Ok(characters);
+
+                    }
+
                     //characters = (from c in db.Characters where (String.IsNullOrEmpty(name) || c.CharacterName == name) && (String.IsNullOrEmpty(movie) || c.Movies.Find(movie) == categoryName) select m).OrderByDescending(m => m.MovieCreationDate).ToList();
 
                 }
@@ -153,9 +184,10 @@ namespace disneyapi.Controllers
                 {
                     Console.WriteLine(ex.Message);
                 }
+                return NotFound();
             }
 
-                return Ok();
+               
         }
 
        internal CharacterDtoMovie newCharacterDtoMovie(CharacterEntity oCharacter, List<MovieEntity> movies)

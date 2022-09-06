@@ -14,6 +14,8 @@ namespace Data
         public DbSet<MovieEntity> Movies { get; set; }
         public DbSet<CategoryEntity> Category { get; set; }
         public DbSet<CharacterMovieEntity> CharacterEntityMovieEntity { get;set;}
+        public DbSet<UserEntity> Users { get; set; }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
