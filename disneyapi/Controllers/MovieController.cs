@@ -11,23 +11,14 @@ using disneyapi.Controllers;
 
 namespace APIDisneyCharacter.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
     public class MovieController : ControllerBase
     {
 
-        [Route("/movies/validacion")]
-        [HttpGet]
-        public List<MovieEntity> GetValidationMovieList()
-        {
-            using (var db = new DisneyContext())
-            {
-                var movies = db.Movies.ToList();
-                return movies;
-            }
-                
-        }
+       
 
         [Route("/movies")]
         [HttpGet]
@@ -155,6 +146,18 @@ namespace APIDisneyCharacter.Controllers
             return Ok(movieDtoCharacter);
         }
 
+        [Route("/movies/validacion")]
+        [HttpGet, AllowAnonymous]
+        public List<MovieEntity> GetValidationMovieList()
+        {
+            using (var db = new DisneyContext())
+            {
+                var movies = db.Movies.ToList();
+                return movies;
+            }
+
+        }
+        [AllowAnonymous]
         internal MovieDtoCharacter newMovieDtoCharacter(MovieEntity movie,List<CharacterEntity> characters)
         {
             MovieDtoCharacter movieDtoCharacter = new MovieDtoCharacter();
@@ -175,6 +178,8 @@ namespace APIDisneyCharacter.Controllers
             }
             return movieDtoCharacter;
         }
+
+        [AllowAnonymous]
         internal MovieDto newMovieDto(MovieEntity movie)
         {
             MovieDto movieDto = new MovieDto();

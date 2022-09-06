@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace disneyapi.Controllers
 {
@@ -20,8 +21,8 @@ namespace disneyapi.Controllers
     {
 
 
-        /*public static UserEntity user = new UserEntity();
-        private readonly IConfiguration configuration;
+        //public static UserEntity user = new UserEntity();
+       /* private readonly IConfiguration configuration;
         public UserController(IConfiguration oConfiguration)
         {
             configuration = oConfiguration;
@@ -39,13 +40,15 @@ namespace disneyapi.Controllers
                     {
                         return BadRequest("El usuario ya esta registrado");
                     }
+                    if (user == null) return BadRequest("No se ingresaron los datos del usuario");
                     CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
                     var newUser = new UserEntity
                     {
                         Email = user.Email,
                         PasswordHash = passwordHash,
                         PasswordSalt = passwordSalt,
-                        VerificationToken = CreateRandomToken(),
+
+                        VerificationToken = CreateToken(user.Email),
                     };
 
                     db.Users.Add(newUser);
@@ -60,6 +63,7 @@ namespace disneyapi.Controllers
             }
             return BadRequest();
         }
+
 
            private string CreateRandomToken()
             {
@@ -82,18 +86,21 @@ namespace disneyapi.Controllers
             }
         }
 
-        /*private string CreateToken()
+        private string CreateToken(string userName)
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, userName)
             };
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration.GetSection("AppSettiengs:Token").Value));
+            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("My clave personalizada para la app"));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            
             var token = new JwtSecurityToken(claims:claims,expires:DateTime.Now.AddDays(1),signingCredentials:credentials);
+            
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
             return jwt;
-        }*/
+        }
         [Route("auth/Login")]
         [HttpGet]
             public IActionResult Login(string userName, string password)

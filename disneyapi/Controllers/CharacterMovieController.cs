@@ -11,6 +11,7 @@ namespace disneyapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CharacterMovieController : ControllerBase
     {
         [Route("/Character/Movies")]
@@ -40,8 +41,9 @@ namespace disneyapi.Controllers
             }
             return Ok(oCharacter);
         }
-    [HttpGet]
-    public List<MovieEntity> GetMovies(int id)
+        [HttpGet]
+        [AllowAnonymous]
+        public List<MovieEntity> GetMovies(int id)
         {
             using (var db = new DisneyContext())
             {
@@ -59,7 +61,7 @@ namespace disneyapi.Controllers
                
         }
     [Route("/CharacterCharacter-")]
-    [HttpGet]
+    [HttpGet,AllowAnonymous]
     public List<CharacterEntity> GetCharcters(int id)
         {
             List<CharacterEntity> characters = new List<CharacterEntity>();

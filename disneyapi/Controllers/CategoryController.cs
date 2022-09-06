@@ -11,7 +11,7 @@ namespace APIDisneyCharacter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         [Route("/category")]
@@ -31,17 +31,6 @@ namespace APIDisneyCharacter.Controllers
                 Console.WriteLine(ex.Message);
             }
             return Ok(oCategory);
-        }
-        [HttpGet]
-        public List<CategoryEntity> GetCategotyList()
-        {
-            using (var db = new DisneyContext())
-            {
-                var categories = db.Category.ToList();
-                return categories;
-            }
-                
-
         }
 
         [Route("/categorys")]
@@ -100,6 +89,16 @@ namespace APIDisneyCharacter.Controllers
                 Console.WriteLine(ex.Message);
             }
             return Ok($"Categoria: {oCategory.CategoryName} Elimianda correctamente");
+        }
+
+        [HttpGet,AllowAnonymous]
+        public List<CategoryEntity> GetCategotyList()
+        {
+            using (var db = new DisneyContext())
+            {
+                var categories = db.Category.ToList();
+                return categories;
+            }
         }
     }
 }

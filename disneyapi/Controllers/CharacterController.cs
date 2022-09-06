@@ -13,17 +13,10 @@ namespace disneyapi.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CharacterController : ControllerBase
     {
 
-        internal CharacterDto newCharDto(CharacterEntity character)
-        {
-            CharacterDto characterDto = new CharacterDto();
-            characterDto.Name = character.CharacterName;
-            characterDto.Image = character.Image;
-
-            return characterDto;
-        }
 
         [Route("/characters")]
         [HttpGet]
@@ -190,7 +183,17 @@ namespace disneyapi.Controllers
                
         }
 
-       internal CharacterDtoMovie newCharacterDtoMovie(CharacterEntity oCharacter, List<MovieEntity> movies)
+        [AllowAnonymous]
+        internal CharacterDto newCharDto(CharacterEntity character)
+        {
+            CharacterDto characterDto = new CharacterDto();
+            characterDto.Name = character.CharacterName;
+            characterDto.Image = character.Image;
+
+            return characterDto;
+        }
+        [AllowAnonymous]
+        internal CharacterDtoMovie newCharacterDtoMovie(CharacterEntity oCharacter, List<MovieEntity> movies)
         {
             CharacterDtoMovie characterDtoMovie = new CharacterDtoMovie();
             characterDtoMovie.CharacetrAge = oCharacter.CharacetrAge;
