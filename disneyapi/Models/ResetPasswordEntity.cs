@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace disneyapi
+namespace disneyapi.Models
 {
     public class ResetPasswordEntity
     {

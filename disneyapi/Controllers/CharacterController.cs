@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json.Serialization;
+using disneyapi.Models;
 
 namespace disneyapi.Controllers
 {

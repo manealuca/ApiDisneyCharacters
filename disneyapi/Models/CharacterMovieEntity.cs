@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace disneyapi
+namespace disneyapi.Models
 {
     [Serializable]
     public class CharacterMovieEntity
@@ -22,7 +22,7 @@ namespace disneyapi
         [JsonIgnore]
         public virtual CharacterEntity? Character { get; set; }
 
-       // [ForeignKey("MovieId")]
+        // [ForeignKey("MovieId")]
         [JsonIgnore]
         public virtual MovieEntity? Movie { get; set; }
 

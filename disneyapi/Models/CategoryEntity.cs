@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace disneyapi
+namespace disneyapi.Models
 {
     [Serializable]
     public class CategoryEntity
@@ -20,8 +20,7 @@ namespace disneyapi
         public int CategoryId { get; set; }
 
         [StringLength(50)]
-        public string? CategoryName { get; set; } = String.Empty;
-        [JsonIgnore]
+        public string? CategoryName { get; set; } = string.Empty;
         public byte[]? CategoryImage { get; set; }
         [JsonIgnore]
         public List<MovieEntity>? Movies { get; set; }
@@ -35,7 +34,7 @@ namespace disneyapi
             CategoryController uController = new CategoryController();
             var category = uController.GetCategotyList();
             string Name = (string)value;
-            if (category.Where(c=> c.CategoryName == Name).Count()>0)
+            if (category.Where(c => c.CategoryName == Name).Count() > 0)
             {
                 return new ValidationResult("Ya Existe una Categoria con este nombre");
             }

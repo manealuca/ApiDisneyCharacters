@@ -1,4 +1,6 @@
-﻿namespace disneyapi.Services.EmailService
+﻿using disneyapi.Models;
+
+namespace disneyapi.Services.EmailService
 {
     public interface IEmailService
     {

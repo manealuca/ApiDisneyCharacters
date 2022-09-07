@@ -6,8 +6,8 @@ using Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using disneyapi;
 using disneyapi.Controllers;
+using disneyapi.Models;
 
 namespace APIDisneyCharacter.Controllers
 {

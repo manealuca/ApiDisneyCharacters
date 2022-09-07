@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace disneyapi
+namespace disneyapi.Models
 {
     [BindProperties]
     [Serializable]
@@ -35,18 +35,18 @@ namespace disneyapi
         public string? ResetVerificationToken { get; set; }
         public DateTime? ResetTokenExpire { get; set; }
     }
- /*   public class UserExistAttribute:ValidationAttribute
-    {
-       protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            UserController uController = new UserController();
-            var     user = uController.GetUsers();
-            string Email = (string)value;
-            if(user.Where(u=>u.Email == Email).Count() > 0)
-            {
-                return new ValidationResult("Ya Existe un usuario asociado a este correo");
-            }
-            return ValidationResult.Success;
-        }
-    }*/
+    /*   public class UserExistAttribute:ValidationAttribute
+       {
+          protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+           {
+               UserController uController = new UserController();
+               var     user = uController.GetUsers();
+               string Email = (string)value;
+               if(user.Where(u=>u.Email == Email).Count() > 0)
+               {
+                   return new ValidationResult("Ya Existe un usuario asociado a este correo");
+               }
+               return ValidationResult.Success;
+           }
+       }*/
 }

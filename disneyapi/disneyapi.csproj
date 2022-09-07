@@ -28,6 +28,9 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Views\CharacterEntities\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

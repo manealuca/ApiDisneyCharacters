@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using APIDisneyCharacter.Controllers;
 
-namespace disneyapi
+namespace disneyapi.Models
 {
     [BindProperties]
     [Serializable]

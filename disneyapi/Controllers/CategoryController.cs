@@ -4,8 +4,8 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using disneyapi;
 using Data;
+using disneyapi.Models;
 
 namespace APIDisneyCharacter.Controllers
 {

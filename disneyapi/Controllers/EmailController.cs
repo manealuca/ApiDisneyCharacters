@@ -1,4 +1,5 @@
-﻿using disneyapi.Services.EmailService;
+﻿using disneyapi.Models;
+using disneyapi.Services.EmailService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

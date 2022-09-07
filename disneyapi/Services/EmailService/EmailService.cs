@@ -1,4 +1,5 @@
-﻿using MailKit.Net.Smtp;
+﻿using disneyapi.Models;
+using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 using MimeKit.Text;

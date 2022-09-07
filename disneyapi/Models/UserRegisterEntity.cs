@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace disneyapi
+namespace disneyapi.Models
 {
     public class UserRegisterEntity
     {
@@ -23,7 +23,7 @@ namespace disneyapi
         public string Email { get; set; }
 
         [Required]
-        [MinLength(6),StringLength(30)]
+        [MinLength(6), StringLength(30)]
         public string Password { get; set; }
         [Required]
         [Compare("Password")]
