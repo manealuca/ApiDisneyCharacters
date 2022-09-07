@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using disneyapi.Services.EmailService;
 
 namespace disneyapi.Controllers
 {
@@ -53,6 +54,15 @@ namespace disneyapi.Controllers
 
                     db.Users.Add(newUser);
                     db.SaveChanges();
+
+                    EmailService eService = new EmailService();
+                    EmailController eController = new EmailController(eService);
+                    EmailDto eDto= new EmailDto();
+                    eDto.To = newUser.Email;
+                    
+                    eDto.Body = $"Hola {newUser.Email} Bienvenido a DisneyWorld!! su API KEY ES: {newUser.VerificationToken}";
+                    eController.SendEmail(eDto);
+
                     return Ok(newUser);
                 }
                 catch (DbUpdateConcurrencyException ex)
